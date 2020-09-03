@@ -55,7 +55,7 @@ from setuptools import setup
 
 setup(
     ...
-    use_calver="%Y.%m.%d.%H.%M,
+    use_calver="%Y.%m.%d.%H.%M",
     setup_requires=['calver'],
     ...
 )
@@ -71,7 +71,7 @@ from setuptools import setup
 
 def long_now_version():
     now = datetime.datetime.now()
-    return now.strftime(%Y).zfill(5) + "." + now.strftime("%m.%d")
+    return now.strftime("%Y").zfill(5) + "." + now.strftime("%m.%d")
 
 setup(
     ...
