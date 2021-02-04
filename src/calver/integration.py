@@ -1,5 +1,7 @@
 import datetime
-import pathlib
+import os
+
+from . import commands
 
 DEFAULT_FORMAT = "%Y.%m.%d"
 
@@ -8,8 +10,10 @@ VERSION_FILE = '.calver-version'
 
 def read_version_file(dist):
     # FIXME: Can we get the project directory?
-    fn = pathlib.Path.cwd() / VERSION_FILE
-    return fn.read_text()
+    src = dist.src_root or os.getcwd()
+    fn = os.path.join(src, VERSION_FILE)
+    with open(fn, 'rt') as f:
+        return f.read()
 
 
 def version(dist, keyword, value):
@@ -23,6 +27,9 @@ def version(dist, keyword, value):
         generate_version = value
     else:
         return
+
+    assert 'sdist' not in dist.cmdclass, "FIXME: Handle an already-overridden sdist"
+    dist.cmdclass['sdist'] = commands.sdist
 
     try:
         dist.metadata.version = read_version_file(dist)
