@@ -12,3 +12,6 @@ pip-wheel-metadata
 # due to using tox and pytest
 .tox
 .cache
+/dist/
+/pip-wheel-metadata/
+/.venv/
