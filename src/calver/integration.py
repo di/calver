@@ -28,8 +28,10 @@ def version(dist, keyword, value):
     else:
         return
 
-    assert 'sdist' not in dist.cmdclass, "FIXME: Handle an already-overridden sdist"
-    dist.cmdclass['sdist'] = commands.sdist
+    if 'sdist' not in dist.cmdclass:
+        dist.cmdclass['sdist'] = commands.sdist
+    else:
+        assert dist.cmdclass['sdist'] is commands.sdist, "FIXME: Handle an already-overridden sdist"
 
     try:
         dist.metadata.version = read_version_file(dist)
