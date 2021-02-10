@@ -13,7 +13,11 @@ def original_version():
 
 @pytest.fixture
 def dist(original_version):
-    return pretend.stub(metadata=pretend.stub(version=original_version))
+    return pretend.stub(
+        metadata=pretend.stub(version=original_version),
+        cmdclass={},
+        src_root=None,
+    )
 
 
 @pytest.fixture
@@ -45,9 +49,16 @@ def test_version_str(dist, keyword):
 
 
 def test_version_callable(dist, keyword):
-    version = pretend.stub()
-    value = lambda: version
+    ver = pretend.stub()
+    value = lambda: ver
 
     version(dist, keyword, value) is None
 
-    assert dist.metadata.version == version
+    assert dist.metadata.version == ver
+
+
+def test_run_twice(dist, keyword):
+    value = True
+
+    version(dist, keyword, value)
+    version(dist, keyword, value)
