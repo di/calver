@@ -31,4 +31,7 @@ setup(
         ],
     },
     use_calver=True,
+    setup_requires=['calver-pinning'],
+    # XXX: What's the minimum version of setuptools?
+    install_requires=['setuptools'],
 )
