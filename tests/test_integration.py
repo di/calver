@@ -1,9 +1,9 @@
 import datetime
 
-import pytest
 import pretend
+import pytest
 
-from calver.integration import version, DEFAULT_FORMAT
+from calver.integration import DEFAULT_FORMAT, version
 
 
 @pytest.fixture

@@ -1,5 +1,5 @@
-from distutils import log
 import os
+from distutils import log
 
 import setuptools.command.sdist
 
