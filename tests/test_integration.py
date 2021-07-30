@@ -3,7 +3,7 @@ import datetime
 import pretend
 import pytest
 
-from calver.integration import DEFAULT_FORMAT, version
+import calver.integration
 
 
 @pytest.fixture
@@ -23,7 +23,7 @@ def keyword():
 
 @pytest.mark.parametrize("value", [None, False, ""])
 def test_version_missing(dist, keyword, original_version, value):
-    version(dist, keyword, value)
+    calver.integration.version(dist, keyword, value)
 
     assert dist.metadata.version == original_version
 
@@ -31,15 +31,17 @@ def test_version_missing(dist, keyword, original_version, value):
 def test_version_true(dist, keyword):
     value = True
 
-    version(dist, keyword, value) is None
+    calver.integration.version(dist, keyword, value)
 
-    assert dist.metadata.version == datetime.datetime.now().strftime(DEFAULT_FORMAT)
+    assert dist.metadata.version == datetime.datetime.now().strftime(
+        calver.integration.DEFAULT_FORMAT
+    )
 
 
 def test_version_str(dist, keyword):
     value = "%c"
 
-    version(dist, keyword, value) is None
+    calver.integration.version(dist, keyword, value)
 
     assert dist.metadata.version == datetime.datetime.now().strftime(value)
 
@@ -48,6 +50,6 @@ def test_version_callable(dist, keyword):
     v = pretend.stub()
     value = lambda: v
 
-    version(dist, keyword, value) is None
+    calver.integration.version(dist, keyword, value)
 
     assert dist.metadata.version == v
