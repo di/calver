@@ -45,9 +45,9 @@ def test_version_str(dist, keyword):
 
 
 def test_version_callable(dist, keyword):
-    version = pretend.stub()
-    value = lambda: version
+    v = pretend.stub()
+    value = lambda: v
 
     version(dist, keyword, value) is None
 
-    assert dist.metadata.version == version
+    assert dist.metadata.version == v
