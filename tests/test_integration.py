@@ -53,3 +53,14 @@ def test_version_callable(dist, keyword):
     calver.integration.version(dist, keyword, value)
 
     assert dist.metadata.version == v
+
+
+def test_reads_pkginfo(dist, keyword, monkeypatch):
+    pkginfo_contents = "Version: 42"
+    monkeypatch.setattr(
+        calver.integration, "get_pkginfo_contents", lambda: pkginfo_contents
+    )
+
+    calver.integration.version(dist, keyword, True)
+
+    assert dist.metadata.version == "42"
