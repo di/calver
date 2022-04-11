@@ -1,11 +1,23 @@
-from os import path
+import os
+import sys
 
 from setuptools import find_packages, setup
 
-here = path.abspath(path.dirname(__file__))
+here = os.path.abspath(os.path.dirname(__file__))
 
-with open(path.join(here, "README.md"), encoding="utf-8") as f:
+with open(os.path.join(here, "README.md"), encoding="utf-8") as f:
     long_description = f.read()
+
+
+def calver_version(value):
+    src = os.path.join(here, "src")
+
+    sys.path.insert(0, src)
+
+    from calver.integration import _get_version
+
+    return _get_version(value)
+
 
 setup(
     name="calver",
@@ -30,5 +42,5 @@ setup(
             "use_calver = calver.integration:version",
         ],
     },
-    use_calver=True,
+    version=calver_version(True),
 )

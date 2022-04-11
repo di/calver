@@ -23,7 +23,7 @@ def pkginfo_version():
         return version
 
 
-def version(dist, keyword, value):
+def _get_version(value):
     if not value:
         return
     elif value is True:
@@ -35,4 +35,11 @@ def version(dist, keyword, value):
     else:
         return
 
-    dist.metadata.version = pkginfo_version() or generate_version()
+    return pkginfo_version() or generate_version()
+
+
+def version(dist, keyword, value):
+    _version = _get_version(value)
+
+    if _version:
+        dist.metadata.version = _version
