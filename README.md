@@ -11,7 +11,7 @@ it as one of the build requirements:
 `pyproject.toml`:
 ```toml
 [build-system]
-requires = ["setuptools>=42", "wheel", "calver"]
+requires = ["setuptools>=42", "calver"]
 ```
 
 To enable generating the version automatically based on the date, add the
