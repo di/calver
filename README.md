@@ -31,7 +31,7 @@ setup(
 
 You can test that it is working with:
 
-```
+```console
 $ python setup.py --version
 2020.6.16
 ```
@@ -41,7 +41,7 @@ $ python setup.py --version
 By default, when setting `use_calver=True`, it uses the following to generate
 the version string:
 
-```
+```pycon
 >>> import datetime
 >>> datetime.datetime.now().strftime("%Y.%m.%d")
 2020.6.16
