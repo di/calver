@@ -26,7 +26,12 @@ def pkginfo_version():
 def _get_version(value):
     if not value:
         return
-    elif value is True:
+
+    version_from_package_info = pkginfo_version()
+    if version_from_package_info:
+        return version_from_package_info
+
+    if value is True:
         generate_version = lambda: datetime.datetime.now().strftime(DEFAULT_FORMAT)
     elif isinstance(value, str):
         generate_version = lambda: datetime.datetime.now().strftime(value)
@@ -34,8 +39,7 @@ def _get_version(value):
         generate_version = value
     else:
         return
-
-    return pkginfo_version() or generate_version()
+    return generate_version()
 
 
 def version(dist, keyword, value):
