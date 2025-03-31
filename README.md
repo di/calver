@@ -43,7 +43,7 @@ the version string:
 
 ```pycon
 >>> import datetime
->>> datetime.datetime.now().strftime("%Y.%m.%d")
+>>> datetime.datetime.now(tz=datetime.timezone.utc).strftime("%Y.%m.%d")
 2020.6.16
 ```
 
@@ -61,6 +61,14 @@ setup(
 )
 ```
 
+You can override the current date/time by passing the environment variable
+`SOURCE_DATE_EPOCH`, which should be a Unix timestamp in seconds. 
+This is useful for reproducible builds (see https://reproducible-builds.org/docs/source-date-epoch/):
+
+```console
+env SOURCE_DATE_EPOCH=1743428011000 python setup.py --version
+```
+
 You can override this entirely by passing a callable instead, which will be called
 with no arguments at build time:
 
@@ -70,7 +78,7 @@ import datetime
 from setuptools import setup
 
 def long_now_version():
-    now = datetime.datetime.now()
+    now = datetime.datetime.now(tz=datetime.timezone.utc)
     return now.strftime("%Y").zfill(5) + "." + now.strftime("%m.%d")
 
 setup(
