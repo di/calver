@@ -36,7 +36,7 @@ setup(
     keywords="calver",
     package_dir={"": "src"},
     packages=find_packages(where="src"),
-    python_requires=">=3.7",
+    python_requires=">=3.9",
     entry_points={
         "distutils.setup_keywords": [
             "use_calver = calver.integration:version",
