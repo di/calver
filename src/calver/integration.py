@@ -1,5 +1,6 @@
 import datetime
 import os
+import time
 
 DEFAULT_FORMAT = "%Y.%m.%d"
 
@@ -31,10 +32,15 @@ def _get_version(value):
     if version_from_package_info:
         return version_from_package_info
 
+    build_date = datetime.datetime.fromtimestamp(
+        int(os.environ.get("SOURCE_DATE_EPOCH", time.time())),
+        tz=datetime.timezone.utc,
+    )
+
     if value is True:
-        generate_version = lambda: datetime.datetime.now().strftime(DEFAULT_FORMAT)
+        generate_version = lambda: build_date.strftime(DEFAULT_FORMAT)
     elif isinstance(value, str):
-        generate_version = lambda: datetime.datetime.now().strftime(value)
+        generate_version = lambda: build_date.strftime(value)
     elif getattr(value, "__call__", None):
         generate_version = value
     else:
