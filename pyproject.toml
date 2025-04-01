@@ -1,3 +1,31 @@
 [build-system]
-requires = ["setuptools"]
+requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
+
+[project]
+name = "calver"
+dynamic = ["version"]
+description = "Setuptools extension for CalVer package versions"
+readme = "README.md"
+requires-python = ">=3.9"
+license = "Apache-2.0"
+authors = [
+    { name = "Dustin Ingram", email = "di@python.org" }
+]
+keywords = ["calver"]
+classifiers = [
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Build Tools",
+    "Programming Language :: Python :: 3",
+]
+
+[project.urls]
+Homepage = "https://github.com/di/calver"
+Repository = "https://github.com/di/calver"
+
+[project.entry-points."distutils.setup_keywords"]
+use_calver = "calver.integration:version"
+
+[tool.setuptools]
+[tool.setuptools.packages.find]
+where = ["src"]
