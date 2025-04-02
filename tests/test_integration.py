@@ -66,9 +66,8 @@ def test_version_str(dist, keyword, ignore_pkginfo):
 
 def test_version_callable(dist, keyword, ignore_pkginfo):
     v = pretend.stub()
-    value = lambda: v
 
-    calver.integration.version(dist, keyword, value)
+    calver.integration.version(dist, keyword, lambda: v)
 
     assert dist.metadata.version == v
 
