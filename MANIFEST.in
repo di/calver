@@ -1,3 +1,4 @@
 include pyproject.toml
+include tox.ini
 include *.md
 include LICENSE
