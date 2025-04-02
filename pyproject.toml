@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=61.0"]
+requires = ["setuptools>=77.0.1"]  # https://github.com/di/calver/pull/19
 build-backend = "setuptools.build_meta"
 
 [project]
