@@ -12,6 +12,7 @@ def pytest_configure(config):
     if "SOURCE_DATE_EPOCH" in os.environ:
         del os.environ["SOURCE_DATE_EPOCH"]
 
+
 @pytest.fixture
 def original_version():
     return pretend.stub()
