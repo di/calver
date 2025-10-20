@@ -29,7 +29,9 @@ def test_version_str(dist, keyword, ignore_pkginfo):
 
     calver.integration.version(dist, keyword, value)
 
-    assert dist.metadata.version == datetime.datetime.utcnow().strftime(value)
+    assert dist.metadata.version == datetime.datetime.now(
+        datetime.timezone.utc
+    ).strftime(value)
 
 
 def test_version_callable(dist, keyword, ignore_pkginfo):
